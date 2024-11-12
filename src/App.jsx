@@ -11,9 +11,12 @@ import ToDoItem from './components/ToDoItem'
 function App() {
   const [listItem, setListItem] = useState([])
 
-   // ADD TASK
-   function addTask(inputTask) {
-    setListItem([...listItem, inputTask]);
+  // ADD TASK
+  function addTask(inputTask) {
+    setListItem([...listItem, {
+      text: inputTask,
+      completed: false
+    }]);
   }
 
   // DELETE TASK
@@ -44,12 +47,12 @@ function App() {
     <>
       <Header />
 
-      <ToDoList 
-      addTask={addTask} 
-      listItem={listItem} 
-      deleteTask={deleteTask}
-      toggleComplete = {toggleComplete}
-      editTask = {editTask}/>
+      <ToDoList
+        addTask={addTask}
+        listItem={listItem}
+        deleteTask={deleteTask}
+        toggleComplete={toggleComplete}
+        editTask={editTask} />
     </>
   )
 }
