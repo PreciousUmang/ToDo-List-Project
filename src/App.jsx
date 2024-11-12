@@ -11,34 +11,22 @@ import ToDoItem from './components/ToDoItem'
 function App() {
   const [listItem, setListItem] = useState([])
 
-  // In order to access Parent Component from Child Component, We are passing this function as Props to ToDoList
-  function addTask(inputTask) {
-    setListItem([...listItem, inputTask])
-
+   // Function to add a new task
+   function addTask(inputTask) {
+    setListItem([...listItem, inputTask]);
   }
 
-  function deleteTask(key) {
-    const newList = [...listItem]
-    newList.splice(key, 1)
-    setListItem([...newList])
+  // Function to delete a task by index
+  function deleteTask(index) {
+    setListItem(listItem.filter((_, i) => i !== index));
   }
 
   return (
     <>
       <Header />
 
-      <ToDoList addTask={addTask} />
-      <div className='p-4'>
-        <h1 className="text-lg text-left">Current Items:</h1>
-
-        {
-          listItem.map((value, index) =>
-            <ToDoItem
-              data={value}
-              key={index}
-              deleteTask={() => deleteTask(index)} />)
-        }
-      </div>
+      <ToDoList addTask={addTask} listItem={listItem} deleteTask={deleteTask} />
+      
       <Footer />
     </>
   )
