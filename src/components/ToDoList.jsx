@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ToDoItem from "./ToDoItem";
 
-function ToDoList({ addTask, listItem, deleteTask }) {
+function ToDoList(props) {
     const [inputTask, setInputTask] = useState("");
 
     return (
@@ -22,7 +22,7 @@ function ToDoList({ addTask, listItem, deleteTask }) {
                         return
                     }
 
-                        addTask(inputTask);
+                    props.addTask(inputTask);
                     setInputTask("");
                 }}
             >
@@ -31,12 +31,13 @@ function ToDoList({ addTask, listItem, deleteTask }) {
 
             <div className="p-4">
                 <h1 className="text-lg text-left">Current Items:</h1>
-                {listItem.map((value, index) => (
+                {props.listItem.map((value, index) => (
                     <ToDoItem
                         key={index}
                         data={value}
-                        deleteTask={() => deleteTask(index)}
-                    />
+                        deleteTask={() => props.deleteTask(index)}
+                        toggleComplete={() => props.toggleComplete(index)}
+                        editTask = {(newText) => props.editTask(newText, index)} />
                 ))}
             </div>
         </>

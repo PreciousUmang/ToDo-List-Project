@@ -11,23 +11,45 @@ import ToDoItem from './components/ToDoItem'
 function App() {
   const [listItem, setListItem] = useState([])
 
-   // Function to add a new task
+   // ADD TASK
    function addTask(inputTask) {
     setListItem([...listItem, inputTask]);
   }
 
-  // Function to delete a task by index
+  // DELETE TASK
   function deleteTask(index) {
     setListItem(listItem.filter((_, i) => i !== index));
   }
+
+  // COMPLETE TOGGLE
+  function toggleComplete(index) {
+    setListItem(
+      listItem.map((task, i) =>
+        i === index ? { ...task, completed: !task.completed } : task
+      )
+    );
+  }
+
+  // EDIT TASK
+  function editTask(index, newText) {
+    setListItem(
+      listItem.map((task, i) =>
+        i === index ? { ...task, text: newText } : task
+      )
+    );
+  }
+
 
   return (
     <>
       <Header />
 
-      <ToDoList addTask={addTask} listItem={listItem} deleteTask={deleteTask} />
-      
-      <Footer />
+      <ToDoList 
+      addTask={addTask} 
+      listItem={listItem} 
+      deleteTask={deleteTask}
+      toggleComplete = {toggleComplete}
+      editTask = {editTask}/>
     </>
   )
 }
