@@ -39,11 +39,11 @@ function ToDoItem(props) {
       <div className="flex ml-4">
         {/* Done/Undo Button */}
         <span
-          className={`cursor-pointer flex justify-center items-center p-2 rounded-s-md transition hover:scale-105 ${
+          className={
             props.data.completed
-              ? "bg-gray-500 hover:bg-gray-400"
-              : "bg-green-500 hover:bg-green-400"
-          } text-white`}
+              ? "cursor-pointer flex justify-center items-center p-2 rounded-s-md transition hover:scale-105 bg-gray-500 hover:bg-gray-400 text-white"
+              : "cursor-pointer flex justify-center items-center p-2 rounded-s-md transition hover:scale-105 bg-green-500 hover:bg-green-400 text-white"
+          }
           onClick={props.toggleComplete}
         >
           {props.data.completed ? "Undo" : "Done"}
